@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web | Portfolio</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: "Poppins", sans-serif;
+        }
+
+        :root {
+            --background-color: #151515;
+            --text-color: white;
+            --highlight-color: turquoise;
+            --transition: 0.3s ease-in-out;
+            --spacing: 2rem;
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 2rem 10%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+        .header a span {
+    color:  turquoise;
+    text-shadow: 0 0 10px  turquoise (255, 204, 0, 0.8);
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            color: var(--text-color);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing);
+        }
+
+        .navbar a {
+            font-size: 1.6rem;
+            color: var(--text-color);
+            padding: 0.5rem;
+            font-weight: 500;
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            color: var(--highlight-color); /* Misalnya warna oranye */
+    border-bottom: 2px solid var(--highlight-color);
+        }
+
+        #menu-icon {
+            font-size: 3.6rem;
+            color: var(--highlight-color);
+            display: none;
+        }
+
+        section {
+            padding: 10rem 10% 5rem;
+            min-height: 100vh;
+        }
+
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            gap: 2rem;
+        }
+
+        .home-img img {
+            display: block;
+            margin: 10px auto;
+            width: 30rem;
+            height: 30rem;
+            border-radius: 50%;
+            box-shadow: 0 0 25px var(--highlight-color);
+            cursor: pointer;
+            transition: 0.4s ease-in-out;
+        }
+
+        .home h1 span {
+    color:  turquoise;
+    text-shadow: 0 0 10px  turquoise (255, 204, 0, 0.8);
+}
+        .home-img img:hover {
+            box-shadow: 0 0 50px var(--highlight-color), 0 0 100px var(--highlight-color);
+        }
+
+        .home h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .home h3 {
+            font-size: 2rem;
+            color: var(--highlight-color);
+        }
+
+        .home p {
+            font-size: 1.4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-icons {
+    font-size: 3.6rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-icons a {
+    width: 30px;
+    height: 30px;
+    border-radius: 20%; /* Mengubah bentuk menjadi bulat */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    transition: var(--transition);
+    overflow: hidden; /* Pastikan gambar tidak terpotong */
+    text-decoration: none; /* Menghilangkan garis bawah default dari tautan */
+    color: inherit; /* Pastikan ikon tidak terpengaruh oleh warna tautan */
+}
+
+.social-icons a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Memastikan gambar menutupi area tanpa distorsi */
+}
+
+.social-icons a:hover {
+    background-color: turquoise; /* Warna latar belakang saat hover */
+    color: var(--text-color); /* Warna teks/icon saat hover */
+    transform: scale(1.2);
+    box-shadow: 0 0 25px var(--highlight-color);
+}
+
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--highlight-color);
+            border-radius: 4rem;
+            font-size: 1.8rem;
+            color: var(--text-color);
+            letter-spacing: 0.1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--highlight-color);
+        }
+
+      /* About Section */
+.about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5rem;
+    gap: 3rem;
+}
+
+.about-content {
+    flex: 1;
+    text-align: left;
+}
+
+.about-img {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-img img {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 1rem;
+    border: 5px solid  turquoise; /* Ganti #ccc dengan warna bingkai yang Anda inginkan */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-img img {
+        width: 80%;
+        max-width: 300px;
+    }
+}
+.about-content p {
+    font-size: 1.5rem; /* Ukuran font lebih besar dari sebelumnya */
+    line-height: 1.8; /* Spasi antar baris agar lebih nyaman dibaca */
+}
+p {
+    font-size: 1.5rem; /* Ukuran default untuk semua paragraf */
+    line-height: 1.8; /* Tambahkan kenyamanan pembacaan */
+}
+.heading {
+    font-size: 4rem; /* Ukuran font lebih besar */
+    font-weight: 800; /* Berat font untuk menonjolkan teks */
+    text-align: center; /* Menjaga teks tetap di tengah (opsional) */
+    margin-bottom: 3rem; /* Spasi bawah untuk memberi jarak */
+    color: var(--highlight-color); /* Opsional, untuk menonjolkan warna */
+}
+
+.skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            background-color: #151515;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .skill {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #151515;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px  rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+        }
+
+        .skill img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+
+        .skill p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            font-size: 14px;
+            color: turquoise;
+            margin-bottom: 1rem;
+        }
+        .services h2 {
+        color:  turquoise;
+        text-shadow: 0 0 10px  turquoise (255, 204, 0, 0.8);
+        text-align: center;
+        font-size: 4rem;
+        }
+
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+} 
+
+.project-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: var(--transition);
+ }
+
+.project-item img {
+    width: auto; /* Menyesuaikan lebar sesuai dengan dimensi asli gambar */
+    height: auto; /* Menyesuaikan tinggi sesuai dengan dimensi asli gambar */
+    max-width: 200px; /* Batas maksimum untuk lebar gambar */
+    max-height: 200px; /* Batas maksimum untuk tinggi gambar */
+    object-fit: contain; /* Menjaga gambar tetap utuh tanpa pemotongan */
+    margin-bottom: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: 0.3s ease-in-out;
+ }
+
+.project-item h4 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--highlight-color);
+    margin-bottom: 1rem;
+ }
+
+.project-item p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: var(--text-color);
+ }
+
+.project-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px var(--highlight-color);
+ }
+
+.project-item img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px var(--highlight-color);
+ }
+
+
+       /* Contact Container */
+    .contact-container {
+    text-align: center;
+    /* width: 90%; */
+    max-width: 1000px;
+  }
+
+.contact-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    
+}
+
+.contact-container h1 span {
+    color:  turquoise; /* Red-orange color for "Me" */
+ }
+
+/* Form Styling */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    justify-content: right;
+ }
+
+
+.contact-form input,
+.contact-form textarea {
+ 
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 2px solid turquoise; /* Red-orange border */
+    border-radius: 5px;
+    color: #fff;
+    
+ }
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #aaa; /* Placeholder text color */
+    
+}
+
+.contact-form textarea {
+    resize: none; /* Disable resizing */
+}
+
+.contact-form button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: turquoise;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: turquoise; /* Darker shade on hover */
+}
+        footer {
+            background-color:turquoise;
+            color:black;
+            text-align: center;
+            padding: 20px 10px;
+            position: relative;
+        }
+
+        footer a {
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            
+        }
+
+        .social-icons {
+            margin: 10px 0;
+            color: black;
+        }
+
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 20px;
+        }
+
+        .copyright {
+            font-size: 14px;
+            margin-top: 10px;
+            color: black;
+        }
+
+        .activate-windows {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1.5rem 5%;
+            }
+
+            .navbar {
+                display: none;
+            }
+
+            #menu-icon {
+                display: block;
+            }
+
+            .home h1 {
+                font-size: 4rem;
+            }
+
+            .home h3 {
+                font-size: 1.8rem;
+            }
+
+            .home p {
+                font-size: 1.2rem;
+            }
+
+            .team-members {
+                flex-direction: column;
+            }
+
+            .team-members .member {
+                margin-bottom: 2rem;
+            }
+
+            .contact input, .contact textarea {
+                width: 100%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#home" class="logo">Adri <span>S.kom</span></a>
+        <nav class="navbar">
+            <a href="#home" class="menu-link active">Home</a>
+            <a href="#about" class="menu-link">About</a>
+            <a href="#services" class="menu-link">Skills</a>
+            <a href="#projects" class="menu-link">projects</a>
+            <a href="#contact" class="menu-link">Contact</a>
+        </nav>
+        <i class="bx bx-menu" id="menu-icon"></i>
+    </header>
+
+
+    <!-- Home Section -->
+    <section class="home" id="home">
+        <div class="home-img">
+            <img src="img/profil2.png" alt="Company Logo">
+        </div>
+        <div class="home-content">
+            <h1>I'm <span>Adri S.kom</span></h1>
+            <!-- <h3 class="text-animation">We specialize in <span></span></h3> -->
+            <p> mengembangkan keterampilan di bidang teknologi informasi, pemrograman, dan pengembangan perangkat lunak..</p>
+        </div>
+        
+</section>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2 class="heading">About <span>Me</span></h2>
+            <p> 
+                Saya adalah mahasiswa Teknik Informatika dengan minat mendalam terhadap teknologi, khususnya di bidang Desain UI/UX dan Pengembangan Web. Sepanjang perjalanan akademik saya, saya telah mengasah keterampilan dan mengembangkan aplikasi web yang fungsional dan responsif. Saya percaya bahwa sinergi antara desain yang menarik dan teknologi canggih sangat penting untuk menciptakan pengalaman digital yang menarik dan bermakna. Saat ini, saya terus menjelajahi teknologi terbaru untuk meningkatkan keahlian saya dan memberikan solusi digital yang memberikan nilai nyata bagi pengguna.</p>
+        </div>
+        <div class="about-img">
+            <img src="img/profil3.png" alt="About Us">
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+            <div class="skill">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma">
+                <p>Figma</p>
+            </div>
+            <div class="skill">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" alt="CSS Logo">
+                <p>Css</p>
+            </div>
+            <div class="skill">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop">
+                <p>Photoshop</p>
+            </div>
+            <div class="skill">
+                <img src="img/html.png" alt="HTML Logo">
+                <p>Html</p>
+            </div>
+            <div class="skill">
+                <img src="img/mysql.png" alt="MySQL Logo">
+                <p>Mysql</p>
+            </div>
+            <div class="skill">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript Logo">
+
+                <p>JavaScript</p>
+            </div>
+    </section>
+
+   
+
+    <section class="projects" id="projects">
+        <div class="projects-content">
+            <h2 class="heading">My <span>Projects</span></h2>
+            <div class="projects-list">
+                <div class="project-item">
+                    <img src="img/ecommers.png" alt="Project 1">
+                    <h4>E-Commerce Platform</h4>
+                    <p>Aplikasi web yang kuat yang dibangun menggunakan kerangka Laravel, 
+                        dirancang untuk memberikan pengalaman berbelanja yang lancar dan aman. </p>
+                </div>
+                <div class="project-item">
+                    <img src="img/figma ui ux.png" alt="Project 2">
+                    <h4>Design Figma</h4>
+                    <p>Desain yang menarik secara visual dan berpusat pada pengguna yang dibuat menggunakan Figma, dengan fokus pada navigasi intuitif dan interaksi pengguna yang menarik.</p>
+                </div>
+                <div class="project-item">
+                    <img src="img/warga.png" alt="Project 2">
+                    <h4>Population Census</h4>
+                    <p>
+                        Tujuan dari aplikasi Population Census adalah untuk mengumpulkan data penduduk secara akurat, efisien, dan cepat. </p>
+                </div>
+               
+        </div>
+    </section>
+    
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h1>Contact <span>Me</span></h1>
+            <form action="#" method="post" class="contact-form">
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="phone" placeholder="Phone Number" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="social-icons">
+            <a href="https://wa.me/6285796244781" target="_blank">
+                <img src="img/th-removebg-preview (1).png" alt="WhatsApp">
+            </a>
+            <a href="https://instagram.com/__dryyy__"><img src="img/instragram.png" alt="Instagram"></a>
+            <a href="https://Facebook.com/Adri"><img src="img/pacebok.png" alt="Facebook"></a>
+            <a href="https://tiktok.com/@___dryy__"><img src="img/tiktok.png" alt="TikTok"></a>
+       </div>
+        <nav>
+            <a href="#faq">FAQ</a>
+            <a href="#services">Service</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#privacy">Privacy Policies</a>
+        </nav>
+        
+        <div class="copyright">
+            &copy; Adri S.kom | All Rights Reserved
+        </div>
+        <div class="activate-windows">
+            Activate Windows <br> Go to Settings to activate Windows.
+        </div>
+    </footer>
+    <script>
+        // Select all sections and menu links
+        const sections = document.querySelectorAll('section');
+        const menuLinks = document.querySelectorAll('.menu-link');
+    
+        // Highlight the active menu link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+    
+            // Determine the current section based on scroll position
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100; // Adjust for header height
+                const sectionHeight = section.offsetHeight;
+    
+                if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id'); // Get the current section's ID
+                }
+            });
+    
+            // Update the active class on menu links
+            menuLinks.forEach(link => {
+                link.classList.remove('active'); // Remove 'active' from all links
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active'); // Add 'active' to the current link
+                }
+            });
+        });
+    
+        // Handle active class when a menu link is clicked
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                // Remove 'active' class from all links
+                menuLinks.forEach(item => item.classList.remove('active'));
+                // Add 'active' class to the clicked link
+                this.classList.add('active');
+            });
+        });
+    </script>
+    <script ></script>
+</body>
+</html>
